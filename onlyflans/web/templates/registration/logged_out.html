@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block 'content' %}
+<div class="text-center">
+    <p>Sesión cerrada correctamente</p>
+
+    <a href="{% url 'login' %}">
+        Selecciona acá para ingresar nuevamente.
+    </a>
+</div>
+
+{% endblock %}

@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block 'content' %}
+<div class="container">
+    <div class="col-12 col-md-6 offset-0 offset-md-3 mt-4 mb-4">
+        <h3 class="text-center">
+            Iniciar sesión
+        </h3>
+        <div>
+            
+
+            {% if form.errors %}
+                <p>Tu usuario y contraseña no es la correcta. Intétalo nuevamente</p>
+            {% endif %}
+
+            {% if next %}
+                {% if user.is_authenticated %}
+                    <p>Tu cuenta no tiene acceso para esta página.</p>
+                    <p>Para continuar, ingresa nuevamente credenciales con acceso</p>
+                {% else %}
+                    <p class="text-center">Por favor, inicie sesión para ver esta página</p>
+                {% endif %}
+            {% endif %}
+            <form method="post" action="{% url 'login' %}">
+                {% csrf_token %}
+                <div class="mb-3 text-center">
+                    <label for="{{ form.username.id_for_label }}" class="form-label">
+                        {{ form.username.label_tag}}
+                    </label>
+                    <div>
+                        {{ form.username}}
+                    </div>
+                </div>
+                <div class="mb-3 text-center">
+                    <label for="{{ form.password.id_for_label }}" class="form-label">
+                        {{ form.password.label_tag}}
+                    </label>
+                    <div>
+                        {{ form.password}}
+                    </div>
+                </div>
+                <div class="text-center" >
+                    <input type="submit" class="text-white rounded-3" style="background-color: #366447; " value="Iniciar sesión">
+                    <input type="hidden" name="next" value="{{ next }}">
+                </div>
+            </form>
+            <p><a href="{% url 'password_reset' %}">¿Olvidó su contraseña?</a></p>
+        </div>
+        
+        
+
+    </div>
+</div>
+{% endblock %}
